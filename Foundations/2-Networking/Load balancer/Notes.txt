@@ -1,0 +1,30 @@
+﻿* Load balancer
+    *  Used to achieve high availability and also achieve scalability
+    * The way Load Balancer works is, they're also referred to as Reverse Proxies
+    * the Load Balancer has to proxy traffic or requests to the various backend servers located into private network(VCN)
+    * The load balancer also protect various backend servers located into private network(VCN)
+    * The LB also provide high availability so that in case a particular backend server is not available, the application can still be up and running
+    * Then LB provide scalability too because if lots of clients start hitting the Load Balancer, you could easily add more backends or more backend servers
+    * TYPES OF LOAD BALANCERS
+        * Layer 7 LB(Slide 1)
+            * Layer 7 basically means it understands HTTP and HTTPS. That's the OSI model
+            * LB's 2 Shapes
+                * Flexible shape where you define the minimum and the maximum and you define the range. And your Load Balancer can achieve any kind of-- support any kind of traffic in that particular range, going from 10 Mbps all the way to 8 Gbps.
+                * Dynamic shape where you predefine the shapes. So you have micro, small, medium, large, and you predefine the shape. And you don't have to warm up your Load Balancer. If the traffic comes to that particular shape, the Load Balancer automatically scales
+        * Public LB
+            * Load Balancer is available on the web
+        * Private LB
+            * Private means your multiple tiers, like a web tier, can talk to your database tier and balance the traffic between them, but both tiers don't have to be public
+        * Network LB(Slide 2)
+            * Network Load Balancer operates at layer 4, layer 3, and layer 4 so it understands TCP, UDP, also supports ICMP
+            *  Like HTTP Load Balancer, it has both public and a private option, so you could create a public Network Load Balancer or a private Network Load Balancer
+            * It's highly available, highly scalable, all those features are supported
+            * The primary reason you would use it is it's much faster than HTTP Load Balancer. It has much lower latency. So if performance is a key criteria for you, go with Network Load Balancer
+            * On the contrary, the HTTP Load Balancer has higher level intelligence because it can look at the packets, it can inspect the packets, and it gets that intelligence. So if you're looking for that kind of routing intelligence, then go with HTTP Load Balancer.
+            * TCP - Transmission Control Protocol
+                * designates a transmission protocol used on IP networks
+            * UDP - User Datagram Protocol 
+                * est un des principaux protocoles de télécommunication utilisés par Internet
+                * L' UDP  permet une communication rapide, sans délai : ce protocole de transport est adapté à une transmission rapide des données, car il n'établit pas de connexion. C'est pourquoi les services faisant appel à l' UDP  doivent mettre à disposition des mesures de correction et de protection propres
+    * Content based routing
+        * Content-based routing is **a mediation capability supported by Oracle Service Bus** based on conditional message processing and transformation capabilities

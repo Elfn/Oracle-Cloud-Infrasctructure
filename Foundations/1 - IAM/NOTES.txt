@@ -1,0 +1,62 @@
+﻿Identity ans Access Management - IAM
+    2 Keys
+        Authentication - AUTHN
+            Authentication is basically figuring out are you who you say you are? And the easiest way to understand this is all of us deal with this on everyday basis. When you go to our website and you provide your user name and password to access some of the content, you are being authenticated
+            Ways To do AuthN
+                Username/Password
+                API signing Keys
+                    When you are making API calls, whether you're using the SDK or the CLI, you would use the API Signing Keys which use a public private key pair to make-- to sign these APIs calls and authenticate these APIs calls. It uses an RSA key pair, as you can see here, with both a public key and private key
+                Auth tokens
+                    There is also a third way to do authentication, and that's based on authentication tokens. And these are Oracle-generated token strings. And the idea here is you can authenticate third-party APIs which don't support OCI authentication model
+        Authorization - AUTHZ
+            Authorization deals with permissions and figuring out what permissions do you have?
+            In OCI, authorization is done through what we call as IAM policies. And policies, think about these as human readable statements to define granular permissions.
+            Policies can be attached to a compartment or they could be attached to a tenancy. If they're attached to a tenancy, it applies to everything within that tenancy. If it's applied to a compartment, it applies to only the resources within that compartment.
+    Concepts
+        Users
+            First thing you do in identity and access management is you define your users. You create your users.
+            Users can be human beings, as is being shown on the screen here, or users can be specific services or could be specific compute instances
+            Instance principle lets instances and applications running on those instances to make API calls against other OCI services
+            Think about principle as an IM(Identity Management) entity that is allowed to interact with OCI resources.
+        Groups
+            Think of group as a collection of users who all need the same type of access to a particular set of resources.
+            So you could create service-specific groups, storage admins, network admins, or you could create groups based on your geographical requirements, so a group of users in North America, et cetera. So you get the idea.
+            Groups are basically collection of users who have the same type of access requirements to resources. So you can have a storage admin group where you could group all the human beings who are storage administrators and so on and so forth
+        Policies
+            Think about these as human readable statements to define granular permissions.
+            Document that specifies who can access which Oracle Cloud Infrastructure resources that your company has, and how.
+            Are basically the authorization. And they decide what kind of permissions the users in these specific groups have. And you write these policies either on compartments,
+            A policy simply allows a group  to work in certain ways with specific types of resources  in a particular compartment
+            Policies can be attached to a compartment or they could be attached to a tenancy. If they're attached to a tenancy, it applies to everything within that tenancy. If it's applied to a compartment, it applies to only the resources within that compartment.
+        Principals
+             A principal is an IAM entity that is allowed to interact with OCI resources
+            2 kinds of principals
+                IAM Users
+                    Think about people who are logging on to your console or using your CLI or SDKs users, human beings actually using your cloud resources
+                Resource principals
+                    A  resource principal is an instance principal which is actually an instance which becomes a principal, which means that it can make API calls against other OCI services like storage.
+        Dynamic groups
+        Compartments
+            Compartments, which are logical entities, to isolate and control access for resources, or you write your policies on the entire account, your tenancy.
+            Think of Root Compartment as this logical construct where you can keep all of your cloud resources. And then what you could do is, you could create your own individual compartments
+            Root Compartment can hold all of the cloud resources. So it can be sort of a kitchen sink. You could put everything in there. But the best practice is to create dedicated compartments to isolate resources.
+            Keep in mind, each resource belongs to a single compartment.
+            Do not put all of your resources in the Root Compartment. Create resource-specific compartments, or whichever way you want to divide your tenancies, and put resources accordingly.
+            Keep in mind that resources can also be moved from one compartment to another
+            Resources from multiple regions can be in the same compartment
+            Keep in mind, all of the compartments you create are global, and they are available in every region you have access to.
+            Compartments can also be nested. So you have up to six levels nesting provided by compartments
+            You could create nested compartments. It just helps keep your design cleaner.
+            You could set quotas and budgets on compartments
+            So you could say that, if the usage in a particular compartment goes beyond $1,000, you'd get flagged, and you get notified
+        Federation
+        Resource
+            Resources are cloud objects
+            How to identify an OCI resource?
+                You identify these resources through a unique identifier called an Oracle Cloud ID, or OCID. This is an Oracle-assigned unique value, identifier.
+            What is OCID?
+                OCID as unique identifier for resources in an OCI service that contains metadata about the resources
+                OCID Syntax
+                    starts with OCID. And there is a resource type, there is something called a realm, there's a region, and then there is a unique string here, a unique ID.
+        Network source
+    
