@@ -1,0 +1,98 @@
+﻿- 3-Compute
+    - Defintiions
+        - Compute service provides you virtual machines and bare metal servers to meet your compute and application requirements
+        - The three defining characteristics of this service include this notion of infinite scalability, high performance, and lower pricing
+        - T-Shirt sizing
+            - in the cloud, there's this notion of T-shirt sizing. So you have a small, medium, large kind of shapes, and your application has to fit those shapes. And sometimes you over provision or under provision, and you have to go through that painful process of changing your machine types. We hope with this flexible shapes, you don't have to do that.
+        - In the traditional approach, we have virtual machines, we have bare metal servers, and we have dedicated host. And you could use either one of them or all of them.
+        - Bare metal servers
+            -  bare metal servers basically means you get a full machine
+            - a full server which is completely dedicated to you
+        - Dedicated host
+            - Dedicated host basically means that you get a full dedicated bare metal machine.
+        - But on top of that, you could run virtual machines.
+        - What's the difference between dedicated host and VMs?
+            - Well, VMs, as you see in the slide here, are shared and multi tenant, meaning the host can be running VMs from multiple customers. They have strong security isolation
+            - But some customers want a dedicated host where they could run their own VMs. And the VMs-- they don't have VMs from any other customer running there. So that option is also provided by using dedicated host
+        - Notion of flexible shape
+            - it means you could choose your own course, your CPU processors, and you could also choose your own memory. You have flexibility in choosing your own configuration.
+            - Literally, there are thousands and thousands of configurations you can choose from
+            - The use of doing this is you could select the right machine type by using our flexible shapes.
+    - Instance basics
+        - Instance  is a compute host
+        - it has several dependencies
+        - Slide 2 - Explained
+            - So you have an Oracle Cloud region here. A region is comprised of multiple ADs. An AD is nothing but a data center, as you can see here. The first dependency the compute service has or compute hosts have is on Virtual Cloud Network. So in order to spin up a compute instance, you need a Virtual Cloud Network. As you can see here, you have a network divided into smaller portions called subnets. So you have a subnetwork here, and you need to create these before you can spin up a compute host.
+            - Now you can spin up a compute host. It's a physical construct. Networking is a virtual construct. So how are they related? Within a compute host, you have a physical network interface card, and you virtualize that card. We virtualize that card-- give you this virtual NIC. And that virtual NIC is placed inside the subnet, as you can see here. And that's the association for the compute host. And that's where the private IP for the compute host comes from, because every compute host or VM you are running, or a bare metal machine, has a private IP address.
+            - Now, there is another set of dependency the compute instances have, and that's to the boot volume and the boot disk and the block volumes. What do these mean? Well, each of these compute hosts you are spinning up has an operating system. And the image that's used to launch an instance determines its operating system and other software. So you have this concept of an image that comes from this network storage disk called a boot disk. So it doesn't stay on the compute host, it's actually living on the network somewhere.
+            - And you also have data, like file systems, et cetera. You're working on the compute instances. They also live on the network. So there is the data disks and operating system disks together. There's a service called block volume service which the compute host uses to run its operating system and run its data disks. Now, these are remote storage, as you can see here. 
+            - So just to recap, the compute control plane has dependency on the networking control plane and the block storage control plane.
+        - Live migration
+            - is really relevant when you are talking about compute instances
+            - It allows to sure that whatever compute host you are running is always up and running
+            - the idea here is if one of the compute hosts goes down, there's a problem, we would migrate your VM to another host in our data center, and it will be transparent
+            -  migrate your virtual machines so you can live-migrate between hosts without rebooting. This keeps your applications running even during maintenance events.
+            - NB
+                - To achieve this in your own data centers is a not-so-trivial task, but we make that seamless within OCI
+    - Scaling
+        - Horizontal Scaling(Auto-Scaling)
+            - Slide 4.2 - Explained
+                - Autoscaling, also referred to as horizontal scaling. Now, as you can see in the picture there, this basically means that you add more VMs of the same shape, or you take a bit more of the same shape. This enables large-scale deployment of VMs. There is scale-out, as you can see from the picture, You're going from one VM to four VMs. And there's also scale-in, We are going from four VMs back to one VM. So both models support it.
+                - Why is this so popular and powerful? The reason it is so powerful is, it gives you that scaling capability, but it also gives you that high availability. In this case, one virtual machine fails; others can still keep working, as you can see from the picture. And a thing which makes it really powerful is, you can match traffic demand by adding to removing VMs automatically.
+                - So let's say you are operating a webstore. Suddenly you start getting more traffic. You could easily Autoscale. And you could add more VMs. The traffic goes down, you could take away those VMs. That's how it works. There is no extra cost for using Autoscaling
+            - 3 Steps to get auto-Scaling
+                - Step 1 
+                    - Create a template/Stamp. And a template is called a config in OCI terminology. It's basically things like your operating system image, your metadata, the shape, the size, and some other characteristics, like storage, networking, et cetera.
+                - Step 2
+                    - Create instance pool based on that template/stamp 
+                    - Pool is basically a collection of those instances in advance. You create that
+                    - And the idea here is, you can manage all of these instances as one unit. So you could stop all of them at the same time. You could start them, you could terminate them, and, to get high availability, you could put them in different availability domains on different data centers
+                - Step 3
+                    - you take your instance pool, and then you write these Autoscaling rules on that
+                    - You start with a desired or initial size. There is a minimum size, and then there is a maximum size. And you write a rule. As you can see on the slide(3), if CPU or memory goes beyond a particular percentage threshold, add some instances. Or if it goes below some threshold, remove some instances. And Autoscaling is constantly monitoring your traffic. It's constantly monitoring your CPU usage. And it's looking at whether to add instances or remove instances.
+                    - So as you can see in this slide(3), we started with an initial size of 2. And then, if the CPU goes beyond 70%, we have to add two more instances. And if it does, you have you end up with four instances.
+        - Vertical Scaling(Slide 4.1)
+            - means, you are scaling up or scaling down instance shapes
+            - You can scale memory. And some of the other characteristics scale accordingly.
+            - Downtime required
+                - there is a downtime required because, likely, we take your machine, and we instantiate a new-- when you institute a new shape. It actually goes to another host. So there is some kind of downtime required. Keep that in mind when you do vertical scaling
+            - Good practice here is, you have to stop your instance before you do any kind of vertical scaling
+        - OS Management Service
+            - Patching and package management is a complex task, and especially when you have larger deployments of instances in the cloud or when you are managing mixed OS environments and using multiple management tools, or using different versions of Oracle Linux and Windows Server instances.
+            - The OS Management Service helps sysadmins automate the management of Oracle Linux and Windows Server instances.
+            - 2 main characteristics
+                - Automated Patch Management
+                - Simplified Package Management
+                    - simplified package management, where you can easily search for, install, remove packages
+                    - It also provides an inventory of installed and available packages and updates.
+            - Patch Management
+                - Patch management, basically it relates to managing the patches, which are released. And these patches are usually released as needed to fix bugs, improve performance, or add new features to the operating systems. Now, we all know that enterprise IT environments contains thousands of computers requiring patches.
+                - NB
+                    - If you are using your own machines in a corporate environment, you are familiar with patching you have to constantly keep your machines patched and up to date. Patching manually is complex and error prone. You don't want to do it manually, or at least don't want to do it manually at scale for a large number of machines.
+            - Package Management
+                - Package management on the other hand, is about installing, patching, and removing software packages. It's a common sysadmin task. You have to deal with this on a day to day basis. But it's very hard to catalog installed and available packages and updates. And again, doing this at scale is fairly complex and error prone. So how does OS Management Service help?
+                - it helps reduce batch management complexity and errors by providing a single consolidated service.
+                - It currently supports both Oracle Linux and Windows operating systems
+                - It supports multiple versions of the operating systems and groups of instances
+                - it works not just for one instance, but it can work on a large group of instances, so really works at kind of scale.
+            - Common vulnerabilities and exposures lookup
+                - These vulnerabilities are stored in a database, CBE database which is available, and so the service looks against that database and allows you to install the packages so that vulnerabilities can easily be patched
+            - No Charge for OSMS
+                - And just keep in mind, there is no charge for customers to use OS Management Service. Additionally, if you are using Oracle Linux instances, support is also provided at no additional cost as part of this service
+            - patch management and package management are fairly complex, error prone, and really hard to do at scale. The OS Management Service helps to automate patch management and simplify package management
+    - NB
+        - Bare metal Server
+            - A bare metal server, also called a dedicated server by some, is a form of cloud services in which the user rents a physical machine from a provider that is not shared with any other tenants.
+                - Un serveur bare metal, également appelé serveur dédié par certains, est une forme de service cloud dans lequel l'utilisateur loue une machine physique à un fournisseur qui n'est partagé avec aucun autre locataire.
+        - Processors options
+            -  OCI is only one of the two cloud providers to provide you options on processors. So you can run AMD-based instances, you could run Intel-based instances, and you could also run Arm-based instances-- are really a powerful thing for mobile computing. The phones you are using today are probably running on Arm processors. Now, Arm is coming into the data centers.
+        - Pricing
+            - on the pricing side, the service implements pay-as-you-go pricing. We are 50% cheaper than any other cloud out there, just to begin with. And not only that, you could use something like a Preemptable VMs to reduce your cost by more than 50% from your regular instances.
+            - Preemptable VMs are low cost short lived VMs suited for batch jobs and fault tolerant workloads. These are similar to regular instances, but price 50% lower. So you can use them to reduce your cost further.
+    - Preemptible VMs
+        - A preemptible VM is **an instance that you can create and run at a much lower price than normal instances**. ... Preemptible instances complete your batch processing tasks without placing additional workload on your existing instances and without requiring you to pay full price for additional normal instances.
+    - Generate ssh public/private key pairs (Cloud Shell)
+        - ssh-keygen -b 2048 -t rsa -f cloudshellkey
+        - -b => For how big data flow is 
+        - -t => the chooser algorithm
+        - -f => Given name of public/private keys
