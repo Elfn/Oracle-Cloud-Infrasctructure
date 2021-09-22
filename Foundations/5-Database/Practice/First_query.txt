@@ -1,0 +1,1 @@
+SELECT /*low*/ c_city,c_region,COUNT(*) FROM ssb.customer c_low GROUP BY c_region,c_city ORDER BY COUNT(*);
