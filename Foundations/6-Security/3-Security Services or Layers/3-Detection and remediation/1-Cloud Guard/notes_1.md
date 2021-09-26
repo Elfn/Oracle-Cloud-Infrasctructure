@@ -20,7 +20,7 @@
 
 * If there's a public bucket, it would flag that, et cetera.  
 
-###2-Responders    
+###3-Responders    
 * provide notification and corrective actions for security problems.  
 * So, as you can see here, if the instances public, you could stop that instance.   
 * If a bucket is public, you could disable that bucket or make it private and so on and so forth.   
