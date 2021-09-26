@@ -1,0 +1,9 @@
+* So you can see on the picture here, there is the master key that is used to encrypt the data key. And so you see that out of the middle box where the data is encrypted by the master key, but the actual encryption for storage, let's say, it's block storage or object storage or file storage, is actually done using the data key.
+
+* So this two tiered encryption is called envelope encryption. And you can use IM policies to authorize access to master keys. So not everybody has access to those keys, and you could also do audit logs to monitor all key related activities. So you secure your key Vault using those things, like policies and log audit logs. So like I said, this is the envelope encryption.
+
+* What are the benefits? It's easier to manage, limits the blast radius, and the fact that you are using master keys, it doesn't generate a complete data re-encryption. Because you could just rotate the master key, you don't have to do the complete encryption here. But one thing to keep in mind is you have to be careful.
+
+* If the master key is deleted, then there is no way for anyone to recover the data. So that is why we soft delete the keys with a seven day gap. And you should take requisite backups. The thing to keep in mind is Vault cannot be deleted immediately. You can schedule the deletion by configuring a waiting period, like it stays on the slide, anywhere from 7 to 30 days.
+
+* The Vault and all the keys created inside the Vault are deleted at the end of this waiting period. And all the data that was protected by those keys is no longer accessible after the Vault is deleted. Keep in mind, once the Vault is deleted, it cannot be recovered. So that's why that 7 to 30 day period is there by design
