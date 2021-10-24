@@ -1,0 +1,5 @@
+So to give an example, if you look at the OCI Region 1, we have 2 availability domains. You have an application which might be running in a high availability mode across two availability domains. Now in case of OCI, you don't really pay for any data transfer happening between these two ADs as you can see on the graphic here. In case of some other Cloud providers, they charge you for data transfer between ADs.
+
+In a way, this is penalizing customers for achieving high availability, which is one of the goals of Cloud computing. So it doesn't make a lot of sense that way. Also with Oracle, incoming traffic is free as it's the industry standard. But outgoing traffic is 10 times lower than some of the other Cloud providers. And you heard me right. It's 10 times lower. It's not 10% lower. It's nearly 10 times lower.
+
+So you save a lot of money, particularly if you have applications which have high data transfer usage. You end up saving significantly by using OCI.
