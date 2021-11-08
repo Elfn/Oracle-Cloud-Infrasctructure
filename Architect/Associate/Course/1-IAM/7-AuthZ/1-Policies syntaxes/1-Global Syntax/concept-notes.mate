@@ -1,0 +1,13 @@
+-the policies follow this kind of a syntax here, as you can see on the slide 1 about concept. 
+
+-And it has this statement allow subjects to do something that is actions in placement basically is where your policies exist, and the policies can exist either in your tenancy, meaning your account, or they can exist in compartments. 
+
+-And you can also have write advanced policies by putting conditions. So you where conditions and can define your conditions.
+
+-Also keep in mind that the policy starts with an allow. 
+
+-There is no deny policy to it. So everything is denied by default.
+
+- And so you have to allow things-- so following the security principle of least privilege. So you keep that in mind. 
+
+-You have to write these allow statements.
