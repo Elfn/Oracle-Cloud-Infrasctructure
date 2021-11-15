@@ -1,1 +1,1 @@
-# Oracle-Cloud-Infrasctructure
+# Oracle-Cloud-Infrastructure
