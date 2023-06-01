@@ -1,0 +1,35 @@
+- Utility (Slide 1)
+So as you can see here, you will write a policy saying, allow group network admins to manage virtual network family in this tenancy, meaning this account.
+
+- You could even lock it down to a particular compartment. 
+
+- But in this case, it's a little bit more relaxed. It says tenancy.
+
+- And then as you see down here, there are users who are launching these compute instances. 
+
+- So what kind of policies do they need? Well, the first policy they need is to manage the instance family, meaning the compute instance family. 
+
+- So you need to give that permission to these administrators, compute administrators.
+
+- The second policy is allowing these administrators to use the volume family, meaning they have to attach and block volumes, which invariably they would be doing for the compute instance because that's where the storage is, the remote storage. 
+
+- You need the second policy.
+
+- And the third policy is allowing these administrators to use the virtual network family. 
+
+- Meaning again, the compute instances depend on the virtual cloud network because that's where the network interface card is. 
+
+- And remember, this is where all the traffic comes in for the storage and network.
+
+- So this is the bare minimum set of policies you would write. 
+
+- And again, some of these verbs can be changed. 
+
+- So you might not give manage permission here. 
+
+- You might have two different sets of users, admins, as well as actual users.
+
+
+
+
+https://docs.oracle.com/en-us/iaas/Content/Identity/Concepts/commonpolicies.htm
